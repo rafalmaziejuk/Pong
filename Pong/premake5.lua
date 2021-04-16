@@ -27,20 +27,42 @@ project "Pong"
 		"%{IncludeDir.glfw}",
 		"%{IncludeDir.glad}",
 		"%{IncludeDir.stb_image}",
-	}
-
-	links
-	{
-		"cglm",
-		"glfw",
-		"glad",
-		"opengl32.lib"
-	}
+	}		
 
 	filter "system:windows"
 		systemversion "latest"
 
 		defines { }
+		
+		links
+		{
+			"cglm",
+			"glfw",
+			"glad",
+			"opengl32.lib"
+		}
+		
+	filter "system:linux"
+		systemversion "latest"
+			
+		links
+		{
+			"cglm",
+			"glfw",
+			"glad"
+		}
+		
+		linkoptions
+		{
+			"-std=c99",
+			"-pthread",
+			"-lm",
+			"-Wl,--no-as-needed",
+			"-ldl",
+			"-lGL",
+			"-lXmu",
+			"-lX11"
+		}
 
 	filter "configurations:Debug"
 		runtime "Debug"
