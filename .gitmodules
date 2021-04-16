@@ -1,0 +1,6 @@
+[submodule "Pong/vendor/glfw"]
+	path = Pong/vendor/glfw
+	url = https://github.com/rafalmaziejuk/glfw.git
+[submodule "Pong/vendor/cglm"]
+	path = Pong/vendor/cglm
+	url = https://github.com/rafalmaziejuk/cglm
