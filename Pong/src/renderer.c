@@ -2,11 +2,9 @@
 
 #include <glad/glad.h>
 
-#include <stdlib.h>
-#include <assert.h>
 #include <stdint.h>
 
-static Renderer *renderer = NULL;
+static uint8_t initialized;
 
 void init(uint16_t width, uint16_t height)
 {
@@ -16,7 +14,7 @@ void init(uint16_t width, uint16_t height)
 
 void shutdown(void)
 {
-    free(renderer);
+
 }
 
 void set_viewport(uint16_t width, uint16_t height)
@@ -36,17 +34,17 @@ void clear(void)
 
 Renderer * renderer_get_instance(void)
 {
-    if (renderer == NULL)
-    {
-        renderer = (Renderer *)malloc(sizeof(Renderer));
-        assert(renderer != NULL);
+    static Renderer renderer;
 
-        renderer->init = init;
-        renderer->shutdown = shutdown;
-        renderer->set_viewport = set_viewport;
-        renderer->set_clear_color = set_clear_color;
-        renderer->clear = clear;
+    if (!initialized)
+    {
+        renderer.init = init;
+        renderer.shutdown = shutdown;
+        renderer.set_viewport = set_viewport;
+        renderer.set_clear_color = set_clear_color;
+        renderer.clear = clear;
+        initialized = 1;
     }
 
-    return renderer;
+    return &renderer;
 }

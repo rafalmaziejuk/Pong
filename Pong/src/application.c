@@ -40,7 +40,6 @@ Application * application_create(const char *name, uint16_t width, uint16_t heig
 
 void application_free(Application *app)
 {
-    renderer_get_instance()->shutdown();
     glfwDestroyWindow(app->window);
     glfwTerminate();
     free(app);
