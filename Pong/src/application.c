@@ -31,9 +31,10 @@ Application * application_create(const char *name, uint16_t width, uint16_t heig
 
     assert(gladLoadGLLoader((GLADloadproc)glfwGetProcAddress));
 
-    renderer_get_instance()->init(width, height);
-    renderer_get_instance()->set_viewport(width, height);
-    renderer_get_instance()->set_clear_color(0.0f, 0.0f, 0.0f, 1.0f);
+	renderer_init_instance();
+    renderer.init(width, height);
+    renderer.set_viewport(width, height);
+    renderer.set_clear_color(0.0f, 0.0f, 0.0f, 1.0f);
 
     return newApp;
 }
@@ -57,11 +58,10 @@ void application_run(Application *app)
 
         glfwPollEvents();
 
-        renderer_get_instance()->clear();
+        renderer.clear();
 
-        
+
 
         glfwSwapBuffers(app->window);
     }
 }
-

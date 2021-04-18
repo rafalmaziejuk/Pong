@@ -4,7 +4,7 @@
 
 #include <stdint.h>
 
-static uint8_t initialized;
+Renderer renderer;
 
 void init(uint16_t width, uint16_t height)
 {
@@ -32,19 +32,11 @@ void clear(void)
     glClear(GL_COLOR_BUFFER_BIT);
 }
 
-Renderer * renderer_get_instance(void)
+void renderer_init_instance(void)
 {
-    static Renderer renderer;
-
-    if (!initialized)
-    {
-        renderer.init = init;
-        renderer.shutdown = shutdown;
-        renderer.set_viewport = set_viewport;
-        renderer.set_clear_color = set_clear_color;
-        renderer.clear = clear;
-        initialized = 1;
-    }
-
-    return &renderer;
+    renderer.init = init;
+    renderer.shutdown = shutdown;
+    renderer.set_viewport = set_viewport;
+    renderer.set_clear_color = set_clear_color;
+    renderer.clear = clear;
 }

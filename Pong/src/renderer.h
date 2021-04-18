@@ -14,6 +14,8 @@ typedef struct Renderer
     void(*clear)(void); 
 } Renderer;
 
-Renderer * renderer_get_instance(void);
+extern Renderer renderer;
+
+void renderer_init_instance(void);
 
 #endif

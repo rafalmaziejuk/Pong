@@ -12,14 +12,14 @@ Texture * texture_create(const char *filepath)
     stbi_uc *data = stbi_load(filepath, &width, &height, &channels, 0);
     assert(data);
 
-    Texture *newTex = (Texture *)malloc(sizeof(Texture));
-    assert(newTex != NULL);
+    Texture *newTexture = (Texture *)malloc(sizeof(Texture));
+    assert(newTexture != NULL);
 
-    newTex->width = width;
-    newTex->height = height;
+    newTexture->width = width;
+    newTexture->height = height;
 
-    glGenTextures(1, &newTex->id);
-    glBindTexture(GL_TEXTURE_2D, newTex->id);
+    glGenTextures(1, &newTexture->id);
+    glBindTexture(GL_TEXTURE_2D, newTexture->id);
 
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
@@ -44,6 +44,8 @@ Texture * texture_create(const char *filepath)
     glGenerateMipmap(GL_TEXTURE_2D);
     
     stbi_image_free(data);
+
+    return newTexture;
 }
 
 void texture_free(Texture *texture)
