@@ -73,14 +73,11 @@ void buffer_layout_push_element(BufferLayout *layout, Type type, uint8_t normali
         layout->vbElements = vbelement_create(type, normalized);
     else
     {
-        VBElement *it = layout->vbElements;
-        while (it->next != NULL)
-            it = it->next;
-
-        it->next = vbelement_create(type, normalized);
+        VBElement *newElement = vbelement_create(type, normalized);
+        newElement->next = layout->vbElements;
+        layout->vbElements = newElement;
     }
 
-    calculate_stride(layout);
     layout->elementCount++;
 }
 
@@ -103,6 +100,7 @@ VertexBuffer * vertex_buffer_create(const float *data, uint32_t size, BufferLayo
     VertexBuffer *newBuffer = (VertexBuffer *)malloc(sizeof *newBuffer);
     assert(newBuffer != NULL);
 
+    calculate_stride(layout);
     newBuffer->layout = layout;
     glGenBuffers(1, &newBuffer->id);
 	glBindBuffer(GL_ARRAY_BUFFER, newBuffer->id);

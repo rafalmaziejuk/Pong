@@ -1,5 +1,7 @@
 #include "application.h"
 #include "renderer.h"
+#include "texture.h"
+#include <cglm/vec2.h>
 
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
@@ -50,6 +52,8 @@ void application_run(Application *app)
 {
     float timeSinceLastUpdate = 0.0f;
 
+    Texture *texture = texture_create("Pong/assets/exit_button.png");
+
     while (!glfwWindowShouldClose(app->window))
     {
         float time = (float)glfwGetTime();
@@ -60,8 +64,10 @@ void application_run(Application *app)
 
         renderer.clear();
 
-
+        renderer.draw_texture((vec2){ 400, 300 }, texture);
 
         glfwSwapBuffers(app->window);
     }
+
+    texture_free(texture);
 }

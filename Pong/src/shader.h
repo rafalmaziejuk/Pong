@@ -2,6 +2,7 @@
 #define SHADER_H
 
 #include <cglm/vec3.h>
+#include <cglm/mat4.h>
 
 #include <stdint.h>
 
