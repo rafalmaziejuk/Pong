@@ -1,6 +1,6 @@
 workspace "Pong"
     architecture "x64"
-    startproject "Snake"
+    startproject "Pong"
 
 	configurations
 	{
